@@ -10,6 +10,7 @@ namespace daw_proiect.ContextModels
         public DbSet<Comanda> Comanda { get; set; }
         public DbSet<Recenzie> Recenzie { get; set; }
         public DbSet<ProdusComanda> ProduseComenzi { get; set; }
+        public DbSet<AdresaPrincipala> AdresaPrincipala { get; set; }
         public Context(DbContextOptions<Context> options) : base(options)
         { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

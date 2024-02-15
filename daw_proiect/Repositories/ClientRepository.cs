@@ -32,6 +32,7 @@ namespace daw_proiect.Repositories
         public async Task UpdateClientAsync(int id, Client client)
         {
             var clientToUpdate = await _context.Client.FirstOrDefaultAsync(cli => cli.Id == id);
+            if(clientToUpdate != null) client.Id = clientToUpdate.Id;
             _context.Client.Entry(clientToUpdate).CurrentValues.SetValues(client);
             await _context.SaveChangesAsync();
         }
@@ -40,6 +41,11 @@ namespace daw_proiect.Repositories
         {
             var clientToDelete = await _context.Client.FirstOrDefaultAsync(cli => cli.Id == id);
             _context.Client.Remove(clientToDelete);
+
+            //stergem adresa principala a clientului sters
+            var adresaPrincipala = await _context.AdresaPrincipala.FirstOrDefaultAsync(adr => adr.ClientId == id);
+            _context.AdresaPrincipala.Remove(adresaPrincipala);
+
             await _context.SaveChangesAsync();
         }
 

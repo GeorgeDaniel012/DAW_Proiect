@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using daw_proiect.ContextModels;
+using daw_proiect.Services;
+using daw_proiect.Models;
 
 namespace daw_proiect.Controllers
 {
@@ -10,53 +12,41 @@ namespace daw_proiect.Controllers
     [ApiController]
     public class ClientController : ControllerBase
     {
-        private readonly Context _context;
+        private readonly IClientService _clientService;
 
-        public ClientController(Context Context)
+        public ClientController(IClientService clientService)
         {
-            this._context = Context;
+            this._clientService = clientService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetClients()
         {
-            return Ok(await _context.Client.ToListAsync());
+            return Ok(await _clientService.GetClientsAsync());
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetClient(int id)
         {
-            var _client = await _context.Client.Select(cli => new Client()
-            {
-                Id = cli.Id,
-                Nume = cli.Nume,
-                Prenume = cli.Prenume,
-                Email = cli.Email,
-                Comenzi = cli.Comenzi,
-                AdresaPrincipala = cli.AdresaPrincipala,
-            }).SingleOrDefaultAsync(cli => cli.Id == id);
-            if (_client == null)
-            {
-                return NotFound();
-            }
-            return Ok(_client);
+            return Ok(await _clientService.GetClientAsync(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult<Client>> PostUser(string Nume, string Prenume, string Email)
+        public async Task<IActionResult> AddClient(PostPutClientDTO clientDTO)
         {
-            var _user = new Client()
-            {
-                Nume = Nume,
-                Prenume = Prenume,
-                Email = Email
-            };
-
-            _context.Client.Add(_user);
-            _context.SaveChanges();
-            return Ok(_user);
+            return Ok(await _clientService.AddClientAsync(clientDTO));
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateClient(int id, PostPutClientDTO clientDTO)
+        {
+            return Ok(await _clientService.UpdateClientAsync(id, clientDTO));
+        }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteClient(int id)
+        {
+            return Ok(await _clientService.DeleteClientAsync(id));
+        }
     }
 }

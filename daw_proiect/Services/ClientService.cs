@@ -29,6 +29,7 @@ namespace daw_proiect.Services
         public async Task<Client> AddClientAsync(PostPutClientDTO clientDTO)
         {
             var client = _mapper.Map<Client>(clientDTO);
+
             //adaugam o inregistrare noua in AdresaPrincipala pt clientul nou
             client.AdresaPrincipala = new AdresaPrincipala()
             {
@@ -36,7 +37,7 @@ namespace daw_proiect.Services
             };
 
             await _clientRepo.AddClientAsync(client);
-            await _clientRepo.SaveAsync();
+            //await _clientRepo.SaveAsync();
             return client;
         }
 
