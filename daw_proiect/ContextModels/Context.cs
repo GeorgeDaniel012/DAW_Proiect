@@ -1,5 +1,6 @@
 ﻿using daw_proiect.Entities;
 using Microsoft.EntityFrameworkCore;
+using ProiectASP.Entities;
 
 namespace daw_proiect.ContextModels
 {
@@ -8,7 +9,8 @@ namespace daw_proiect.ContextModels
         public DbSet<Client> Client { get; set; }
         public DbSet<Produs> Produs { get; set; }
         public DbSet<Comanda> Comanda { get; set; }
-        public DbSet<Recenzie> Recenzie { get; set; }
+        public DbSet<Locatie> Locatii { get; set; }
+        public DbSet<Recenzie> Recenzii { get; set; }
         public DbSet<ProdusComanda> ProduseComenzi { get; set; }
         public DbSet<AdresaPrincipala> AdresaPrincipala { get; set; }
         public Context(DbContextOptions<Context> options) : base(options)
