@@ -1,14 +1,12 @@
-﻿namespace daw_proiect.Entities
+﻿using daw_proiect.Entities;
+
+namespace daw_proiect.Models
 {
-    public class Recenzie
+    public class RecenzieDto
     {
-        public int Id { get; set; }
         public int Nota { get; set; }
         public string Comentariu { get; set; }
-
         public int ProdusId { get; set; }
-        public Produs Produs { get; set; }
         public int ClientId { get; set; }
-        public Client Client { get; set; }
     }
 }

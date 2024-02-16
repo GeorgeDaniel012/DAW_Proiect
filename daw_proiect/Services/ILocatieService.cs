@@ -1,11 +1,10 @@
 ﻿using daw_proiect.Entities;
-using ProiectASP.Entities;
 
-namespace daw_proiect.Repositories
+
+namespace daw_proiect.Services
 {
-    public interface INewsRepository
+    public interface ILocatieService
     {
-
         public Task<IEnumerable<Locatie>> GetLocatieAsync();
         public Task<Locatie> GetLocatieAsync(int id);
         public Task<Locatie> PutLocatieAsync(Locatie locatie);

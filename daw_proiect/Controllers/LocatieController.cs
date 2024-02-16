@@ -2,14 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using daw_proiect.ContextModels;
-using ProiectASP.Entities;
-using ProiectASP.Repositories;
+using daw_proiect.Entities;
 using System.Drawing;
 using daw_proiect.Models;
-using daw_proiect.Models;
-using daw_proiect.Repositories;
+using daw_proiect.Services;
 
-namespace ProiectASP.Controllers
+
+namespace daw_proiect.Controllers
 {
 
     [Route("api/[controller]")]
@@ -17,18 +16,18 @@ namespace ProiectASP.Controllers
     public class LocatieController : ControllerBase
     {
         private readonly Context _locatieContext;
-        private readonly INewsRepository _repo;
-        public LocatieController(Context locatie, INewsRepository repo)
+        private readonly ILocatieService _repo;
+        public LocatieController(Context locatie, ILocatieService service)
         {
             this._locatieContext = locatie;
-            this._repo = repo;
+            this._repo = service;
         }
         //[EnableCors("AnotherPolicy")]
         [HttpGet]
 
-        public async Task<IEnumerable<Locatie>> GetLocatie()
+        public async Task<IActionResult> GetLocatie()
         {
-            return await _repo.GetLocatieAsync();
+            return Ok(await _repo.GetLocatieAsync());
         }
 
         [EnableCors("AnotherPolicy")]

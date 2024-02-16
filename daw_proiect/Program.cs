@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using daw_proiect.ContextModels;
 using daw_proiect.Repositories;
-using ProiectASP.Repositories;
 using daw_proiect.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,7 +31,11 @@ builder.Services.AddDbContext<Context>(options =>
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IClientService, ClientService>();
 
-builder.Services.AddScoped<INewsRepository, NewsRepository>();
+builder.Services.AddScoped<ILocatieRepository, LocatieRepository>();
+builder.Services.AddScoped<ILocatieService, LocatieService>();
+
+builder.Services.AddScoped<IRecenzieRepository, RecenzieRepository>();
+builder.Services.AddScoped<IRecenzieService, RecenzieService>();
 
 builder.Services.AddScoped<IProdusRepository, ProdusRepository>();
 builder.Services.AddScoped<IProdusService, ProdusService>();

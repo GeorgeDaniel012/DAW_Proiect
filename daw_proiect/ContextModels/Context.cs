@@ -1,6 +1,6 @@
 ﻿using daw_proiect.Entities;
 using Microsoft.EntityFrameworkCore;
-using ProiectASP.Entities;
+
 
 namespace daw_proiect.ContextModels
 {
@@ -9,8 +9,8 @@ namespace daw_proiect.ContextModels
         public DbSet<Client> Client { get; set; }
         public DbSet<Produs> Produs { get; set; }
         public DbSet<Comanda> Comanda { get; set; }
-        public DbSet<Locatie> Locatii { get; set; }
-        public DbSet<Recenzie> Recenzii { get; set; }
+        public DbSet<Locatie> Locatie { get; set; }
+        public DbSet<Recenzie> Recenzie { get; set; }
         public DbSet<ProdusComanda> ProduseComenzi { get; set; }
         public DbSet<AdresaPrincipala> AdresaPrincipala { get; set; }
         public Context(DbContextOptions<Context> options) : base(options)
@@ -18,13 +18,20 @@ namespace daw_proiect.ContextModels
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //one to one
-            //Utilizator - AdresaPrincipala
+            //Client - AdresaPrincipala
 
             modelBuilder.Entity<AdresaPrincipala>().HasKey(adr => new { adr.ClientId });
 
             modelBuilder.Entity<AdresaPrincipala>()
                 .HasOne(adr => adr.Client)
                 .WithOne(user => user.AdresaPrincipala);
+
+            //Produs-Reteta
+            modelBuilder.Entity<Reteta>().HasKey(ret => new { ret.ProdusId });
+
+            modelBuilder.Entity<Reteta>()
+                .HasOne(ret => ret.Produs)
+                .WithOne(prod => prod.Reteta);
 
             //one to many
             //Comanda - Utilizator
@@ -38,6 +45,18 @@ namespace daw_proiect.ContextModels
             modelBuilder.Entity<Categorie>()
                 .HasMany(cat => cat.Produse)
                 .WithOne(prod => prod.Categorie);
+
+            //Produs - Recenzie
+            modelBuilder.Entity<Produs>()
+                .HasMany(pro => pro.Recenzii)
+                .WithOne(rec => rec.Produs);
+                //.HasForeignKey(r => r.ProdusId);
+
+            //Client - Recenzie
+            modelBuilder.Entity<Client>()
+              .HasMany(cli => cli.Recenzi)
+              .WithOne(rec => rec.Client);
+              //.HasForeignKey(r => r.ClientId);
 
             //many to many
             //Produs - Comanda (prin ProdusComanda)
@@ -53,6 +72,19 @@ namespace daw_proiect.ContextModels
                         .HasOne(prodcom => prodcom.Comanda)
                         .WithMany(prod => prod.Produse)
                         .HasForeignKey(prodcom => prodcom.ComandaId);
+
+            //Produs - Locatie (prin Stoc)
+            modelBuilder.Entity<Stoc>().HasKey(prodloc => new { prodloc.ProdusId, prodloc.LocatieId });
+
+            modelBuilder.Entity<Stoc>()
+                        .HasOne(prodloc => prodloc.Produs)
+                        .WithMany(prod => prod.Locatii)
+                        .HasForeignKey(prodloc => prodloc.ProdusId);
+
+            modelBuilder.Entity<Stoc>()
+                        .HasOne(prodloc => prodloc.Locatie)
+                        .WithMany(prod => prod.Produse)
+                        .HasForeignKey(prodloc => prodloc.LocatieId);
 
             base.OnModelCreating(modelBuilder);
         }
