@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using daw_proiect.ContextModels;
 using daw_proiect.Repositories;
-using ProiectASP.Repositories;
 using daw_proiect.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,6 +32,10 @@ builder.Services.AddScoped<IClientService, ClientService>();
 
 builder.Services.AddScoped<ILocatieRepository, LocatieRepository>();
 builder.Services.AddScoped<ILocatieService, LocatieService>();
+
+builder.Services.AddScoped<IRecenzieRepository, RecenzieRepository>();
+builder.Services.AddScoped<IRecenzieService, RecenzieService>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

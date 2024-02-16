@@ -4,7 +4,7 @@ using daw_proiect.ContextModels;
 using daw_proiect.Entities;
 using System.Drawing;
 
-namespace ProiectASP.Repositories
+namespace daw_proiect.Repositories
 {
     public class LocatieRepository : ILocatieRepository
     {

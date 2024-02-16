@@ -1,6 +1,5 @@
 ﻿using daw_proiect.Entities;
 
-
 namespace daw_proiect.Repositories
 {
     public interface ILocatieRepository
