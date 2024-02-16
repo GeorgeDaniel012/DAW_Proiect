@@ -1,4 +1,4 @@
-﻿namespace ProiectASP.Entities
+﻿namespace daw_proiect.Entities
 {
     public class Locatie
     {

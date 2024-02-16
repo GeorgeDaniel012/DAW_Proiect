@@ -32,6 +32,7 @@ builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IClientService, ClientService>();
 
 builder.Services.AddScoped<ILocatieRepository, LocatieRepository>();
+builder.Services.AddScoped<ILocatieService, LocatieService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

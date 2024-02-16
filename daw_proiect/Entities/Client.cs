@@ -1,5 +1,4 @@
-﻿using ProiectASP.Entities;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace daw_proiect.Entities
 {

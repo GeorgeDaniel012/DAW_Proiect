@@ -1,6 +1,6 @@
 ﻿using daw_proiect.Entities;
 using Microsoft.EntityFrameworkCore;
-using ProiectASP.Entities;
+
 
 namespace daw_proiect.ContextModels
 {
@@ -9,8 +9,8 @@ namespace daw_proiect.ContextModels
         public DbSet<Client> Client { get; set; }
         public DbSet<Produs> Produs { get; set; }
         public DbSet<Comanda> Comanda { get; set; }
-        public DbSet<Locatie> Locatii { get; set; }
-        public DbSet<Recenzie> Recenzii { get; set; }
+        public DbSet<Locatie> Locatie { get; set; }
+        public DbSet<Recenzie> Recenzie { get; set; }
         public DbSet<ProdusComanda> ProduseComenzi { get; set; }
         public DbSet<AdresaPrincipala> AdresaPrincipala { get; set; }
         public Context(DbContextOptions<Context> options) : base(options)
@@ -42,14 +42,14 @@ namespace daw_proiect.ContextModels
             //Produs - Recenzie
             modelBuilder.Entity<Produs>()
                 .HasMany(pro => pro.Recenzii)
-                .WithOne(rec => rec.Produs)
-                .HasForeignKey(r => r.ProdusId);
+                .WithOne(rec => rec.Produs);
+                //.HasForeignKey(r => r.ProdusId);
 
             //Client - Recenzie
             modelBuilder.Entity<Client>()
               .HasMany(cli => cli.Recenzi)
-              .WithOne(rec => rec.Client)
-              .HasForeignKey(r => r.ClientId);
+              .WithOne(rec => rec.Client);
+              //.HasForeignKey(r => r.ClientId);
 
             //many to many
             //Produs - Comanda (prin ProdusComanda)

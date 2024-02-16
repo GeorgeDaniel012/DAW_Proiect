@@ -1,7 +1,7 @@
 ﻿using daw_proiect.Repositories;
 using Microsoft.EntityFrameworkCore;
 using daw_proiect.ContextModels;
-using ProiectASP.Entities;
+using daw_proiect.Entities;
 using System.Drawing;
 
 namespace ProiectASP.Repositories
@@ -17,13 +17,13 @@ namespace ProiectASP.Repositories
         }
         public async Task<IEnumerable<Locatie>> GetLocatieAsync()
         {
-            return await _locatieContext.Locatii.ToListAsync();
+            return await _locatieContext.Locatie.ToListAsync();
 
         }
         public async Task<Locatie> GetLocatieAsync(int id)
         {
 
-            return await _locatieContext.Locatii.FirstOrDefaultAsync(s => s.Id == id);
+            return await _locatieContext.Locatie.FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<Locatie> PutLocatieAsync(Locatie locatie)
@@ -41,14 +41,20 @@ namespace ProiectASP.Repositories
 
         public async Task<Locatie> DeleteLocatieAsync(int id)
         {
-            var locatie = await _locatieContext.Locatii.FindAsync(id);
+            var locatie = await _locatieContext.Locatie.FindAsync(id);
             if (locatie != null)
             {
-                _locatieContext.Locatii.Remove(locatie);
+                _locatieContext.Locatie.Remove(locatie);
                 await _locatieContext.SaveChangesAsync();
             }
             return locatie;
         }
+
+        /*public async Task UpdateLocatieAsync(Locatie locatie)
+        {
+            _locatieContext.Entry(locatie).State = EntityState.Modified;
+            await _locatieContext.SaveChangesAsync();
+        */
 
 
     }
