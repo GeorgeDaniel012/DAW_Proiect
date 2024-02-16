@@ -1,4 +1,6 @@
-﻿namespace daw_proiect.Entities
+﻿using ProiectASP.Entities;
+
+namespace daw_proiect.Entities
 {
     public class Produs
     {
@@ -9,5 +11,6 @@
         public Categorie? Categorie { get; set; }
         public int? CategorieId { get; set; }
         public ICollection<ProdusComanda> Comenzi { get; set; }
+        public ICollection<Recenzie> Recenzii { get; set; }
     }
 }

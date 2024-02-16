@@ -6,12 +6,12 @@ using System.Drawing;
 
 namespace ProiectASP.Repositories
 {
-    public class NewsRepository : INewsRepository
+    public class LocatieRepository : ILocatieRepository
     {
 
         private readonly Context _locatieContext;
 
-        public NewsRepository(Context locatie)
+        public LocatieRepository(Context locatie)
         {
             this._locatieContext = locatie;
         }

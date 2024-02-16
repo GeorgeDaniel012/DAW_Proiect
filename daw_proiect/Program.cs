@@ -31,7 +31,7 @@ builder.Services.AddDbContext<Context>(options =>
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IClientService, ClientService>();
 
-builder.Services.AddScoped<INewsRepository, NewsRepository>();
+builder.Services.AddScoped<ILocatieRepository, LocatieRepository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

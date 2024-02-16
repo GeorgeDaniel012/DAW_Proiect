@@ -18,7 +18,7 @@ namespace daw_proiect.ContextModels
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //one to one
-            //Utilizator - AdresaPrincipala
+            //Client - AdresaPrincipala
 
             modelBuilder.Entity<AdresaPrincipala>().HasKey(adr => new { adr.ClientId });
 
@@ -38,6 +38,18 @@ namespace daw_proiect.ContextModels
             modelBuilder.Entity<Categorie>()
                 .HasMany(cat => cat.Produse)
                 .WithOne(prod => prod.Categorie);
+
+            //Produs - Recenzie
+            modelBuilder.Entity<Produs>()
+                .HasMany(pro => pro.Recenzii)
+                .WithOne(rec => rec.Produs)
+                .HasForeignKey(r => r.ProdusId);
+
+            //Client - Recenzie
+            modelBuilder.Entity<Client>()
+              .HasMany(cli => cli.Recenzi)
+              .WithOne(rec => rec.Client)
+              .HasForeignKey(r => r.ClientId);
 
             //many to many
             //Produs - Comanda (prin ProdusComanda)

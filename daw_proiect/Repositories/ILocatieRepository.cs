@@ -3,7 +3,7 @@ using ProiectASP.Entities;
 
 namespace daw_proiect.Repositories
 {
-    public interface INewsRepository
+    public interface ILocatieRepository
     {
 
         public Task<IEnumerable<Locatie>> GetLocatieAsync();

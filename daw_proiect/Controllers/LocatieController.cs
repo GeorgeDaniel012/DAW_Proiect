@@ -17,8 +17,8 @@ namespace ProiectASP.Controllers
     public class LocatieController : ControllerBase
     {
         private readonly Context _locatieContext;
-        private readonly INewsRepository _repo;
-        public LocatieController(Context locatie, INewsRepository repo)
+        private readonly ILocatieRepository _repo;
+        public LocatieController(Context locatie, ILocatieRepository repo)
         {
             this._locatieContext = locatie;
             this._repo = repo;
