@@ -12,6 +12,16 @@ namespace daw_proiect.Helpers
             CreateMap<GetClientDTO, Client>();
             CreateMap<Client, PostPutClientDTO>();
             CreateMap<PostPutClientDTO, Client>();
+
+            CreateMap<Produs, GetProdusDTO>();
+            CreateMap<GetProdusDTO, Produs>();
+            CreateMap<Produs, PostPutProdusDTO>();
+            CreateMap<PostPutProdusDTO, Produs>();
+
+            CreateMap<Comanda, GetComandaDTO>();
+            CreateMap<GetComandaDTO, Comanda>();
+            CreateMap<Comanda, PostPutComandaDTO>();
+            CreateMap<PostPutComandaDTO, Comanda>();
         }
     }
 }

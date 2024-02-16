@@ -27,6 +27,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Cofetarie")));
+
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IClientService, ClientService>();
 
@@ -35,6 +36,12 @@ builder.Services.AddScoped<ILocatieService, LocatieService>();
 
 builder.Services.AddScoped<IRecenzieRepository, RecenzieRepository>();
 builder.Services.AddScoped<IRecenzieService, RecenzieService>();
+
+builder.Services.AddScoped<IProdusRepository, ProdusRepository>();
+builder.Services.AddScoped<IProdusService, ProdusService>();
+
+builder.Services.AddScoped<IComandaRepository, ComandaRepository>();
+builder.Services.AddScoped<IComandaService, ComandaService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

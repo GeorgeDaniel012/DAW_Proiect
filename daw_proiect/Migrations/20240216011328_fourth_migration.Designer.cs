@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using daw_proiect.ContextModels;
 
@@ -11,9 +12,11 @@ using daw_proiect.ContextModels;
 namespace daw_proiect.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240216011328_fourth_migration")]
+    partial class fourth_migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,6 +154,9 @@ namespace daw_proiect.Migrations
                     b.Property<int>("StareComanda")
                         .HasColumnType("int");
 
+                    b.Property<int>("TipComanda")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
@@ -174,6 +180,10 @@ namespace daw_proiect.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Descriere")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -202,13 +212,13 @@ namespace daw_proiect.Migrations
             modelBuilder.Entity("ProiectASP.Entities.Recenzie", b =>
                 {
                     b.HasOne("daw_proiect.Entities.Client", "Client")
-                        .WithMany("Recenzi")
+                        .WithMany()
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("daw_proiect.Entities.Produs", "Produs")
-                        .WithMany("Recenzii")
+                        .WithMany()
                         .HasForeignKey("ProdusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -278,8 +288,6 @@ namespace daw_proiect.Migrations
                     b.Navigation("AdresaPrincipala");
 
                     b.Navigation("Comenzi");
-
-                    b.Navigation("Recenzi");
                 });
 
             modelBuilder.Entity("daw_proiect.Entities.Comanda", b =>
@@ -290,8 +298,6 @@ namespace daw_proiect.Migrations
             modelBuilder.Entity("daw_proiect.Entities.Produs", b =>
                 {
                     b.Navigation("Comenzi");
-
-                    b.Navigation("Recenzii");
                 });
 #pragma warning restore 612, 618
         }

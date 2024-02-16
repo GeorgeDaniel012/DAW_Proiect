@@ -6,7 +6,6 @@ namespace daw_proiect.Entities
     {
         public int Id { get; set; }
         public string Denumire { get; set; }
-        public string Name { get; set; }
         public string Descriere { get; set; }
         public Categorie? Categorie { get; set; }
         public int? CategorieId { get; set; }

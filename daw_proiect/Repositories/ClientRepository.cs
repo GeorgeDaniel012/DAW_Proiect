@@ -15,12 +15,12 @@ namespace daw_proiect.Repositories
 
         public async Task<IEnumerable<Client>> GetClientsAsync()
         {
-            return await _context.Client.ToListAsync();
+            return await _context.Client.Include(cli => cli.AdresaPrincipala).ToListAsync();
         }
 
         public async Task<Client> GetClientAsync(int id)
         {
-            return await _context.Client.FirstOrDefaultAsync(cli => cli.Id == id);
+            return await _context.Client.Include(cli => cli.AdresaPrincipala).FirstOrDefaultAsync(cli => cli.Id == id);
         }
 
         public async Task AddClientAsync(Client client)
