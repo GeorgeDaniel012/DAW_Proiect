@@ -1,4 +1,6 @@
-﻿namespace daw_proiect.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace daw_proiect.Entities
 {
     public class Client
     {
@@ -6,6 +8,7 @@
         public string Nume { get; set; }
         public string Prenume { get; set; }
         public string Email { get; set; }
+        [JsonIgnore]
         public ICollection<Comanda> Comenzi { get; set; }
         public AdresaPrincipala? AdresaPrincipala { get; set; }
     }

@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using daw_proiect.ContextModels;
 using daw_proiect.Repositories;
 using ProiectASP.Repositories;
+using daw_proiect.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,10 +28,13 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Cofetarie")));
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IClientService, ClientService>();
 
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
