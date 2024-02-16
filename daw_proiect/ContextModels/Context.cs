@@ -26,6 +26,13 @@ namespace daw_proiect.ContextModels
                 .HasOne(adr => adr.Client)
                 .WithOne(user => user.AdresaPrincipala);
 
+            //Produs-Reteta
+            modelBuilder.Entity<Reteta>().HasKey(ret => new { ret.ProdusId });
+
+            modelBuilder.Entity<Reteta>()
+                .HasOne(ret => ret.Produs)
+                .WithOne(prod => prod.Reteta);
+
             //one to many
             //Comanda - Utilizator
 
