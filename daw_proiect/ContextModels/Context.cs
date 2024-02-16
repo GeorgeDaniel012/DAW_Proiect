@@ -66,6 +66,19 @@ namespace daw_proiect.ContextModels
                         .WithMany(prod => prod.Produse)
                         .HasForeignKey(prodcom => prodcom.ComandaId);
 
+            //Produs - Locatie (prin Stoc)
+            modelBuilder.Entity<Stoc>().HasKey(prodloc => new { prodloc.ProdusId, prodloc.LocatieId });
+
+            modelBuilder.Entity<Stoc>()
+                        .HasOne(prodloc => prodloc.Produs)
+                        .WithMany(prod => prod.Locatii)
+                        .HasForeignKey(prodloc => prodloc.ProdusId);
+
+            modelBuilder.Entity<Stoc>()
+                        .HasOne(prodloc => prodloc.Locatie)
+                        .WithMany(prod => prod.Produse)
+                        .HasForeignKey(prodloc => prodloc.LocatieId);
+
             base.OnModelCreating(modelBuilder);
         }
     }

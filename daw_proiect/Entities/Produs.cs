@@ -12,5 +12,6 @@ namespace daw_proiect.Entities
         public int? CategorieId { get; set; }
         public ICollection<ProdusComanda> Comenzi { get; set; }
         public ICollection<Recenzie> Recenzii { get; set; }
+        public ICollection<Stoc> Locatii { get; set; }
     }
 }
