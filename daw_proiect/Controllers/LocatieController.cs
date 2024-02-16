@@ -1,10 +1,13 @@
-﻿using daw_proiect.ContextModels;
-using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using daw_proiect.Entities;
-using System.Drawing;
+using daw_proiect.ContextModels;
 using ProiectASP.Entities;
+using ProiectASP.Repositories;
+using System.Drawing;
+using daw_proiect.Models;
+using daw_proiect.Models;
+using daw_proiect.Repositories;
 
 namespace ProiectASP.Controllers
 {
@@ -14,17 +17,18 @@ namespace ProiectASP.Controllers
     public class LocatieController : ControllerBase
     {
         private readonly Context _locatieContext;
-
-        public LocatieController(Context locatie)
+        private readonly INewsRepository _repo;
+        public LocatieController(Context locatie, INewsRepository repo)
         {
             this._locatieContext = locatie;
+            this._repo = repo;
         }
         //[EnableCors("AnotherPolicy")]
         [HttpGet]
 
-        public async Task<IActionResult> GetLocatie()
+        public async Task<IEnumerable<Locatie>> GetLocatie()
         {
-            return Ok(await _locatieContext.Locatii.ToListAsync());
+            return await _repo.GetLocatieAsync();
         }
 
         [EnableCors("AnotherPolicy")]
@@ -32,14 +36,7 @@ namespace ProiectASP.Controllers
 
         public async Task<IActionResult> GetLocatie(int id)
         {
-            var l = await _locatieContext.Locatii.Select(loc => new Locatie()
-            {
-                Oras = loc.Oras,
-                Strada = loc.Strada,
-                Numar_cladire = loc.Numar_cladire
-            }).SingleOrDefaultAsync(loc => loc.Id == id);
-
-
+            var l = await _repo.GetLocatieAsync(id);
             if (l == null)
                 return NotFound();
             return Ok(l);
@@ -47,7 +44,7 @@ namespace ProiectASP.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Locatie>> PostLocatie(Locatie l)
+        public async Task<ActionResult<Locatie>> PostLocatie(LocatieDto l)
         {
             var loc = new Locatie()
             {
@@ -55,22 +52,20 @@ namespace ProiectASP.Controllers
                 Strada = l.Strada,
                 Numar_cladire = l.Numar_cladire
             };
-            await _locatieContext.Locatii.AddAsync(loc);
-            await _locatieContext.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetLocatie), new { id = loc.Id }, loc);
+            var createdLocatie = await _repo.PutLocatieAsync(loc);
+            return CreatedAtAction(nameof(GetLocatie), new { id = createdLocatie.Id }, createdLocatie);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLocatie(int id)
         {
-            var loc = await _locatieContext.Locatii.FindAsync(id);
+            var loc = await _repo.DeleteLocatieAsync(id);
             if (loc != null)
             {
-                _locatieContext.Remove(loc);
-                _locatieContext.SaveChanges();
                 return Ok(loc);
             }
             return NotFound();
         }
+
     }
 }
