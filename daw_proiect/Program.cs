@@ -28,10 +28,18 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Cofetarie")));
+
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IClientService, ClientService>();
 
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
+
+builder.Services.AddScoped<IProdusRepository, ProdusRepository>();
+builder.Services.AddScoped<IProdusService, ProdusService>();
+
+builder.Services.AddScoped<IComandaRepository, ComandaRepository>();
+builder.Services.AddScoped<IComandaService, ComandaService>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

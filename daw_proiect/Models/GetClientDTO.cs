@@ -10,6 +10,6 @@ namespace daw_proiect.Models
         public string Email { get; set; }
         //pentru include:
         public ICollection<GetComandaDTO> Comenzi { get; set; }
-        //public AdresaPrincipala? AdresaPrincipala { get; set; }
+        public AdresaPrincipala? AdresaPrincipala { get; set; }
     }
 }
