@@ -1,5 +1,7 @@
 ﻿
 
+using System.Text.Json.Serialization;
+
 namespace daw_proiect.Entities
 {
     public class Produs
@@ -12,6 +14,7 @@ namespace daw_proiect.Entities
         public ICollection<ProdusComanda> Comenzi { get; set; }
         public ICollection<Recenzie> Recenzii { get; set; }
         public ICollection<Stoc> Locatii { get; set; }
+        [JsonIgnore]
         public Reteta Reteta { get; set; }
     }
 }

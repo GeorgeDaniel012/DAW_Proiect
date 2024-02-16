@@ -29,6 +29,14 @@ namespace daw_proiect.Services
         public async Task<Produs> AddProdusAsync(PostPutProdusDTO produsDTO)
         {
             var produs = _mapper.Map<Produs>(produsDTO);
+
+            //adaugam o inregistrare noua in Reteta pt produsul nou
+            produs.Reteta = new Reteta()
+            {
+                Produs = produs,
+                Indicatii = ""
+            };
+
             await _produsRepo.AddProdusAsync(produs);
             return produs;
         }
