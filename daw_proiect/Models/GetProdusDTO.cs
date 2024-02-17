@@ -12,6 +12,6 @@ namespace daw_proiect.Models
         public ICollection<ProdusComanda> Comenzi { get; set; }
         public ICollection<Recenzie> Recenzii { get; set; }
         public ICollection<Stoc> Locatii { get; set; }
-        public Reteta Reteta { get; set; }
+        public Reteta? Reteta { get; set; }
     }
 }
