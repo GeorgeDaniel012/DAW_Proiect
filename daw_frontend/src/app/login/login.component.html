@@ -1,0 +1,10 @@
+<h2>Autentifica-te</h2>
+<form [formGroup] = "loginGroup">
+    <label>Username</label>
+    <input formControlName = "username" type = "text" name = "user"><br/>
+
+    <label>Password</label>
+    <input formControlName = "password" type = "password" name = "password"><br/>
+
+    <button (click) = "submit()">Log In</button>
+</form>

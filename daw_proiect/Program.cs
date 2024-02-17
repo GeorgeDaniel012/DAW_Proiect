@@ -6,22 +6,22 @@ using daw_proiect.Authorization;
 using daw_proiect.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
 builder.Services.AddCors(options =>
 {
-    /*
     options.AddPolicy(name: "_myAllowSpecificOrigins",
                       policy =>
                       {
                           policy.WithOrigins("localhost:4200").AllowAnyHeader().AllowAnyMethod();
-                      });*/
-    options.AddPolicy("CorsPolicy", builder =>
-    {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
-    });
+                      });
+    /*    options.AddPolicy("CorsPolicy", builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });*/
 });
 
 builder.Services.AddControllers();
