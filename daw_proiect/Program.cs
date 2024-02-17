@@ -5,17 +5,25 @@ using daw_proiect.Services;
 using daw_proiect.Authorization;
 using daw_proiect.Helpers;
 
+var AllowSpecificOrigin = "_allowSpecificOrigin";
+
 var builder = WebApplication.CreateBuilder(args);
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+//var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: "_myAllowSpecificOrigins",
-                      policy =>
-                      {
-                          policy.WithOrigins("localhost:4200").AllowAnyHeader().AllowAnyMethod();
-                      });
+    /*    options.AddPolicy(name: "_myAllowSpecificOrigins",
+                          policy =>
+                          {
+                              policy.WithOrigins("localhost:4200").AllowAnyHeader().AllowAnyMethod();
+                          });*/
+    options.AddPolicy(name: AllowSpecificOrigin,
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+        });
     /*    options.AddPolicy("CorsPolicy", builder =>
         {
             builder.AllowAnyOrigin()
@@ -64,7 +72,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors("CorsPolicy");
+app.UseCors(AllowSpecificOrigin);
 
 app.UseHttpsRedirection();
 
