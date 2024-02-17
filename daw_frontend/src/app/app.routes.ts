@@ -4,8 +4,13 @@ import { ProduseComponent } from './produse/produse.component';
 import { UtilizatoriComponent } from './utilizatori/utilizatori.component';
 import { ClientiComponent } from './clienti/clienti.component';
 import { ComenziComponent } from './comenzi/comenzi.component';
+import { AcasaComponent } from './acasa/acasa.component';
 
 export const routes: Routes = [
+    {
+        path: "",
+        component: AcasaComponent
+    },
     {
         path: "users",
         component: UtilizatoriComponent

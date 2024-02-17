@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Client } from '../client';
+import { Client } from '../entities/client';
 
 @Component({
   selector: 'app-client-comp',

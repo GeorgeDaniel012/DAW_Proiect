@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ComandaService } from '../comanda.service';
+import { ComandaService } from '../services/comanda.service';
 import { take } from 'rxjs';
 import { ComandaCompComponent } from "../comanda-comp/comanda-comp.component";
 import { RouterLink } from '@angular/router';

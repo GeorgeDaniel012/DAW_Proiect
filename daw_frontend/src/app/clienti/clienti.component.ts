@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ClientService } from '../client.service';
+import { ClientService } from '../services/client.service';
 import { take } from 'rxjs';
 import { ClientCompComponent } from "../client-comp/client-comp.component";
 import { NgForOf } from '@angular/common';

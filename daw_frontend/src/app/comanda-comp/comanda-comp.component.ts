@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Comanda } from '../comanda';
+import { Comanda } from '../entities/comanda';
 import { ProdusCompComponent } from "../produs-comp/produs-comp.component";
 import { NgForOf } from '@angular/common';
 import { RouterLink } from '@angular/router';
