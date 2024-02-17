@@ -15,12 +15,23 @@ namespace daw_proiect.Repositories
 
         public async Task<IEnumerable<Comanda>> GetComenziAsync()
         {
-            return await _context.Comanda.ToListAsync();
+            /*            return await _context.Comanda.Include(com => com.Produse).Join(
+                            _context.Produs,
+                            com => com.Produse.ProdusId,
+                            prod => prod.Id,
+                            (com, prod) => new { com, prod }
+                            ).ToListAsync();*/
+
+            // folosim un Include si un ThenInclude pentru a returna si produsele
+            // care fac parte din comanda
+            return await _context.Comanda.Include(com => com.Produse)
+                .ThenInclude(prodcom => prodcom.Produs).ToListAsync();
         }
 
         public async Task<Comanda> GetComandaAsync(int id)
         {
-            return await _context.Comanda.FirstOrDefaultAsync(prod => prod.Id == id);
+            return await _context.Comanda.Include(com => com.Produse)
+                .ThenInclude(prodcom => prodcom.Produs).FirstOrDefaultAsync(prod => prod.Id == id);
         }
 
         public async Task AddComandaAsync(Comanda comanda)

@@ -11,6 +11,7 @@ namespace daw_proiect.Entities
         [JsonIgnore]
         public ICollection<Comanda> Comenzi { get; set; }
         public AdresaPrincipala? AdresaPrincipala { get; set; }
+        [JsonIgnore]
         public ICollection<Recenzie> Recenzi { get; set;}
     }
 }
