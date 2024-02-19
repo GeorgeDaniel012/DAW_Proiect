@@ -25,6 +25,9 @@ namespace daw_proiect.Helpers
 
             CreateMap<Locatie, LocatieDto>();
             CreateMap<LocatieDto, Locatie>();
+
+            CreateMap<Recenzie, RecenzieDto>();
+            CreateMap<RecenzieDto, Recenzie>();
         }
     }
 }

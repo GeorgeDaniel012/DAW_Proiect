@@ -52,6 +52,12 @@ namespace daw_proiect.Controllers
             return CreatedAtAction(nameof(GetRecenzie), new { id = createdRecenzie.Id }, createdRecenzie);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateRecenzie(int id, RecenzieDto rec)
+        {
+            return Ok(await _recenzieService.UpdateRecenzieAsync(id, rec));
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRecenzie(int id)
         {
