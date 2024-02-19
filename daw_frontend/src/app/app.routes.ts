@@ -30,5 +30,17 @@ export const routes: Routes = [
     {
         path: "comenzi",
         component: ComenziComponent
+    },
+    {
+        path: "locatii",
+        component: ComenziComponent
+    },
+    {
+        path: "recenzii",
+        component: ComenziComponent
+    },
+    {
+        path: "retete",
+        component: ComenziComponent
     }
 ];
