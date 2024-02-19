@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LocatieComponent } from './locatii.component';
+import { LocatieCompComponent } from './locatii-comp.component';
 
-describe('LocatieComponent', () => {
-  let component: LocatieComponent;
-  let fixture: ComponentFixture<LocatieComponent>;
+describe('LocatieCompComponent', () => {
+  let component: LocatieCompComponent;
+  let fixture: ComponentFixture<LocatieCompComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LocatieComponent]
+      imports: [LocatieCompComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(LocatieComponent);
+    fixture = TestBed.createComponent(LocatieCompComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
