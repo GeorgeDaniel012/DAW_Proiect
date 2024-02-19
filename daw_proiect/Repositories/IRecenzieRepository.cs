@@ -1,4 +1,5 @@
 ﻿using daw_proiect.Entities;
+using daw_proiect.Models;
 
 namespace daw_proiect.Repositories
 {

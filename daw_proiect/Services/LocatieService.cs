@@ -29,9 +29,7 @@ namespace daw_proiect.Services
 
         public async Task<Locatie> PutLocatieAsync(Locatie loc)
         {
-            //var locatie = _mapper.Map<Client>(clientDTO);
             await _locatieRepo.PutLocatieAsync(loc);
-            //await _clientRepo.SaveAsync();
             return loc;
         }
 

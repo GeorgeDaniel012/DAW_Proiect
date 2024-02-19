@@ -11,12 +11,14 @@ namespace daw_proiect.ContextModels
         public DbSet<Comanda> Comanda { get; set; }
         public DbSet<Locatie> Locatie { get; set; }
         public DbSet<Recenzie> Recenzie { get; set; }
+        public DbSet<Reteta> Reteta { get; set; }
         public DbSet<ProdusComanda> ProduseComenzi { get; set; }
         public DbSet<AdresaPrincipala> AdresaPrincipala { get; set; }
         public Context(DbContextOptions<Context> options) : base(options)
         { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             //one to one
             //Client - AdresaPrincipala
 

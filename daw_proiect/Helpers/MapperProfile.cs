@@ -28,6 +28,9 @@ namespace daw_proiect.Helpers
 
             CreateMap<Recenzie, RecenzieDto>();
             CreateMap<RecenzieDto, Recenzie>();
+
+            CreateMap<Reteta, RetetaDto>();
+            CreateMap<RetetaDto, Reteta>();
         }
     }
 }

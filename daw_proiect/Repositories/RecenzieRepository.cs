@@ -1,5 +1,6 @@
 ﻿using daw_proiect.ContextModels;
 using daw_proiect.Entities;
+using daw_proiect.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace daw_proiect.Repositories

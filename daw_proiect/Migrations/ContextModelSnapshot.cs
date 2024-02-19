@@ -22,60 +22,6 @@ namespace daw_proiect.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ProiectASP.Entities.Locatie", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Numar_cladire")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Oras")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Strada")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Locatii");
-                });
-
-            modelBuilder.Entity("ProiectASP.Entities.Recenzie", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Comentariu")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Nota")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProdusId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("ProdusId");
-
-                    b.ToTable("Recenzii");
-                });
-
             modelBuilder.Entity("daw_proiect.Entities.AdresaPrincipala", b =>
                 {
                     b.Property<int>("ClientId")
@@ -158,6 +104,30 @@ namespace daw_proiect.Migrations
                     b.ToTable("Comanda");
                 });
 
+            modelBuilder.Entity("daw_proiect.Entities.Locatie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Numar_cladire")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Oras")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Strada")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Locatie");
+                });
+
             modelBuilder.Entity("daw_proiect.Entities.Produs", b =>
                 {
                     b.Property<int>("Id")
@@ -199,23 +169,69 @@ namespace daw_proiect.Migrations
                     b.ToTable("ProduseComenzi");
                 });
 
-            modelBuilder.Entity("ProiectASP.Entities.Recenzie", b =>
+            modelBuilder.Entity("daw_proiect.Entities.Recenzie", b =>
                 {
-                    b.HasOne("daw_proiect.Entities.Client", "Client")
-                        .WithMany("Recenzi")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.HasOne("daw_proiect.Entities.Produs", "Produs")
-                        .WithMany("Recenzii")
-                        .HasForeignKey("ProdusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Navigation("Client");
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
 
-                    b.Navigation("Produs");
+                    b.Property<string>("Comentariu")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Nota")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProdusId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("ProdusId");
+
+                    b.ToTable("Recenzie");
+                });
+
+            modelBuilder.Entity("daw_proiect.Entities.Reteta", b =>
+                {
+                    b.Property<int>("ProdusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Indicatii")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProdusId");
+
+                    b.ToTable("Reteta");
+                });
+
+            modelBuilder.Entity("daw_proiect.Entities.Stoc", b =>
+                {
+                    b.Property<int>("ProdusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LocatieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Cantitate")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProdusId", "LocatieId");
+
+                    b.HasIndex("LocatieId");
+
+                    b.ToTable("Stoc");
                 });
 
             modelBuilder.Entity("daw_proiect.Entities.AdresaPrincipala", b =>
@@ -268,6 +284,55 @@ namespace daw_proiect.Migrations
                     b.Navigation("Produs");
                 });
 
+            modelBuilder.Entity("daw_proiect.Entities.Recenzie", b =>
+                {
+                    b.HasOne("daw_proiect.Entities.Client", "Client")
+                        .WithMany("Recenzi")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("daw_proiect.Entities.Produs", "Produs")
+                        .WithMany("Recenzii")
+                        .HasForeignKey("ProdusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Produs");
+                });
+
+            modelBuilder.Entity("daw_proiect.Entities.Reteta", b =>
+                {
+                    b.HasOne("daw_proiect.Entities.Produs", "Produs")
+                        .WithOne("Reteta")
+                        .HasForeignKey("daw_proiect.Entities.Reteta", "ProdusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Produs");
+                });
+
+            modelBuilder.Entity("daw_proiect.Entities.Stoc", b =>
+                {
+                    b.HasOne("daw_proiect.Entities.Locatie", "Locatie")
+                        .WithMany("Produse")
+                        .HasForeignKey("LocatieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("daw_proiect.Entities.Produs", "Produs")
+                        .WithMany("Locatii")
+                        .HasForeignKey("ProdusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Locatie");
+
+                    b.Navigation("Produs");
+                });
+
             modelBuilder.Entity("daw_proiect.Entities.Categorie", b =>
                 {
                     b.Navigation("Produse");
@@ -287,11 +352,21 @@ namespace daw_proiect.Migrations
                     b.Navigation("Produse");
                 });
 
+            modelBuilder.Entity("daw_proiect.Entities.Locatie", b =>
+                {
+                    b.Navigation("Produse");
+                });
+
             modelBuilder.Entity("daw_proiect.Entities.Produs", b =>
                 {
                     b.Navigation("Comenzi");
 
+                    b.Navigation("Locatii");
+
                     b.Navigation("Recenzii");
+
+                    b.Navigation("Reteta")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
