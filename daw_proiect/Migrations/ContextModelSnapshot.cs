@@ -367,6 +367,7 @@ namespace daw_proiect.Migrations
 
                     b.Navigation("Reteta")
                         .IsRequired();
+
                 });
 #pragma warning restore 612, 618
         }

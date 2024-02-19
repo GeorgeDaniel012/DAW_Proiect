@@ -8,6 +8,7 @@ namespace daw_proiect.ContextModels
     {
         public DbSet<Client> Client { get; set; }
         public DbSet<Produs> Produs { get; set; }
+        public DbSet<Reteta> Reteta { get; set; }
         public DbSet<Comanda> Comanda { get; set; }
         public DbSet<Locatie> Locatie { get; set; }
         public DbSet<Recenzie> Recenzie { get; set; }

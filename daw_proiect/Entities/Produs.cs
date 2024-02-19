@@ -1,4 +1,4 @@
-﻿
+﻿using System.Text.Json.Serialization;
 
 namespace daw_proiect.Entities
 {
@@ -9,9 +9,11 @@ namespace daw_proiect.Entities
         public string Descriere { get; set; }
         public Categorie? Categorie { get; set; }
         public int? CategorieId { get; set; }
+        [JsonIgnore]
         public ICollection<ProdusComanda> Comenzi { get; set; }
         public ICollection<Recenzie> Recenzii { get; set; }
         public ICollection<Stoc> Locatii { get; set; }
-        public Reteta Reteta { get; set; }
+        //[JsonIgnore]
+        public Reteta? Reteta { get; set; }
     }
 }

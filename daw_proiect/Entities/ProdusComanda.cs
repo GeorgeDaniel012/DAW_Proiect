@@ -7,7 +7,6 @@ namespace daw_proiect.Entities
         [JsonIgnore]
         public Comanda Comanda { get; set; }
         public int ComandaId { get; set; }
-        [JsonIgnore]
         public Produs Produs { get; set; }
         public int ProdusId { get; set;}
     }

@@ -15,12 +15,12 @@ namespace daw_proiect.Repositories
 
         public async Task<IEnumerable<Produs>> GetProduseAsync()
         {
-            return await _context.Produs.ToListAsync();
+            return await _context.Produs.Include(prod => prod.Reteta).ToListAsync();
         }
 
         public async Task<Produs> GetProdusAsync(int id)
         {
-            return await _context.Produs.FirstOrDefaultAsync(prod => prod.Id == id);
+            return await _context.Produs.Include(prod => prod.Reteta).FirstOrDefaultAsync(prod => prod.Id == id);
         }
 
         public async Task AddProdusAsync(Produs produs)
@@ -41,6 +41,11 @@ namespace daw_proiect.Repositories
         {
             var produsToDelete = await _context.Produs.FirstOrDefaultAsync(prod => prod.Id == id);
             _context.Produs.Remove(produsToDelete);
+
+            //stergem reteta produsului sters
+            var reteta = await _context.Reteta.FirstOrDefaultAsync(ret => ret.ProdusId == id);
+            _context.Reteta.Remove(reteta);
+
             await _context.SaveChangesAsync();
         }
 
