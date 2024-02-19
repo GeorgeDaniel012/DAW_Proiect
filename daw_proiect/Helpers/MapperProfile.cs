@@ -22,6 +22,9 @@ namespace daw_proiect.Helpers
             CreateMap<GetComandaDTO, Comanda>();
             CreateMap<Comanda, PostPutComandaDTO>();
             CreateMap<PostPutComandaDTO, Comanda>();
+
+            CreateMap<Locatie, LocatieDto>();
+            CreateMap<LocatieDto, Locatie>();
         }
     }
 }

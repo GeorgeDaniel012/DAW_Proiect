@@ -9,12 +9,12 @@ namespace daw_proiect.Services
     public class LocatieService: ILocatieService
     {
         private readonly ILocatieRepository _locatieRepo;
-        //private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
-        public LocatieService(ILocatieRepository locRepo)
+        public LocatieService(IMapper mapper,ILocatieRepository locRepo)
         {
             _locatieRepo = locRepo;
-           // _mapper = mapper;
+             _mapper = mapper;
         }
 
         public async Task<IEnumerable<Locatie>> GetLocatieAsync()
@@ -35,13 +35,12 @@ namespace daw_proiect.Services
             return loc;
         }
 
-        /*
-        public async Task<Client> UpdateClientAsync(int id, PostPutClientDTO clientDTO)
+        public async Task<Locatie> UpdateLocatieAsync(int id, LocatieDto loc)
         {
-            var client = _mapper.Map<Client>(clientDTO);
-            await _clientRepo.UpdateClientAsync(id, client);
-            return client;
-        }*/
+            var locatie = _mapper.Map<Locatie>(loc);
+            await _locatieRepo.UpdateLocatieAsync(id, locatie);
+            return locatie;
+        }
 
         public async Task<Locatie> DeleteLocatieAsync(int id)
         {

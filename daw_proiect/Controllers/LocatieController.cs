@@ -55,6 +55,12 @@ namespace daw_proiect.Controllers
             return CreatedAtAction(nameof(GetLocatie), new { id = createdLocatie.Id }, createdLocatie);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateLocatie(int id, LocatieDto loc)
+        {
+            return Ok(await _repo.UpdateLocatieAsync(id, loc));
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLocatie(int id)
         {
@@ -66,5 +72,9 @@ namespace daw_proiect.Controllers
             return NotFound();
         }
 
+        
     }
 }
+
+
+

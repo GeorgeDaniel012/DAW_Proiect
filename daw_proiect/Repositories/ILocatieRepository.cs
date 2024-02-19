@@ -9,6 +9,6 @@ namespace daw_proiect.Repositories
         public Task<Locatie> GetLocatieAsync(int id);
         public Task<Locatie> PutLocatieAsync(Locatie locatie);
         public Task<Locatie> DeleteLocatieAsync(int id);
-       // public Task<Locatie> UpdateLocatieAsync( Locatie locatie);
+        public Task UpdateLocatieAsync(int id, Locatie locatie);
     }
 }

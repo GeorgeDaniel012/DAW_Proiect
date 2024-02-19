@@ -49,14 +49,14 @@ namespace daw_proiect.ContextModels
             //Produs - Recenzie
             modelBuilder.Entity<Produs>()
                 .HasMany(pro => pro.Recenzii)
-                .WithOne(rec => rec.Produs);
-                //.HasForeignKey(r => r.ProdusId);
+                .WithOne(rec => rec.Produs)
+                .HasForeignKey(r => r.ProdusId);
 
             //Client - Recenzie
             modelBuilder.Entity<Client>()
               .HasMany(cli => cli.Recenzi)
-              .WithOne(rec => rec.Client);
-              //.HasForeignKey(r => r.ClientId);
+              .WithOne(rec => rec.Client)
+              .HasForeignKey(r => r.ClientId);
 
             //many to many
             //Produs - Comanda (prin ProdusComanda)
