@@ -12,8 +12,8 @@ using daw_proiect.ContextModels;
 namespace daw_proiect.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240214023759_first_migration")]
-    partial class first_migration
+    [Migration("20240219123809_migratie2")]
+    partial class migratie2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,18 +27,16 @@ namespace daw_proiect.Migrations
 
             modelBuilder.Entity("daw_proiect.Entities.AdresaPrincipala", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("ClientId")
                         .HasColumnType("int");
 
                     b.Property<string>("Adresa")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Oras")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("ClientId");
 
                     b.ToTable("AdresaPrincipala");
                 });
@@ -60,6 +58,31 @@ namespace daw_proiect.Migrations
                     b.ToTable("Categorie");
                 });
 
+            modelBuilder.Entity("daw_proiect.Entities.Client", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nume")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Prenume")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Client");
+                });
+
             modelBuilder.Entity("daw_proiect.Entities.Comanda", b =>
                 {
                     b.Property<int>("Id")
@@ -68,23 +91,44 @@ namespace daw_proiect.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DataComanda")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("StareComanda")
                         .HasColumnType("int");
 
-                    b.Property<int>("TipComanda")
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("Comanda");
+                });
+
+            modelBuilder.Entity("daw_proiect.Entities.Locatie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Numar_cladire")
                         .HasColumnType("int");
+
+                    b.Property<string>("Oras")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Strada")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Comanda");
+                    b.ToTable("Locatie");
                 });
 
             modelBuilder.Entity("daw_proiect.Entities.Produs", b =>
@@ -103,10 +147,6 @@ namespace daw_proiect.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Descriere")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -140,72 +180,83 @@ namespace daw_proiect.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Continut")
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comentariu")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Nota")
                         .HasColumnType("int");
 
                     b.Property<int>("ProdusId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ProdusId");
+                    b.HasIndex("ClientId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ProdusId");
 
                     b.ToTable("Recenzie");
                 });
 
-            modelBuilder.Entity("daw_proiect.Entities.User", b =>
+            modelBuilder.Entity("daw_proiect.Entities.Reteta", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("ProdusId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Indicatii")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nume")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("ProdusId");
 
-                    b.Property<string>("Prenume")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.ToTable("Reteta");
+                });
 
-                    b.HasKey("Id");
+            modelBuilder.Entity("daw_proiect.Entities.Stoc", b =>
+                {
+                    b.Property<int>("ProdusId")
+                        .HasColumnType("int");
 
-                    b.ToTable("User");
+                    b.Property<int>("LocatieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Cantitate")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProdusId", "LocatieId");
+
+                    b.HasIndex("LocatieId");
+
+                    b.ToTable("Stoc");
                 });
 
             modelBuilder.Entity("daw_proiect.Entities.AdresaPrincipala", b =>
                 {
-                    b.HasOne("daw_proiect.Entities.User", "User")
+                    b.HasOne("daw_proiect.Entities.Client", "Client")
                         .WithOne("AdresaPrincipala")
-                        .HasForeignKey("daw_proiect.Entities.AdresaPrincipala", "UserId")
+                        .HasForeignKey("daw_proiect.Entities.AdresaPrincipala", "ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("daw_proiect.Entities.Comanda", b =>
                 {
-                    b.HasOne("daw_proiect.Entities.User", "User")
+                    b.HasOne("daw_proiect.Entities.Client", "Client")
                         .WithMany("Comenzi")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("daw_proiect.Entities.Produs", b =>
@@ -238,21 +289,51 @@ namespace daw_proiect.Migrations
 
             modelBuilder.Entity("daw_proiect.Entities.Recenzie", b =>
                 {
+                    b.HasOne("daw_proiect.Entities.Client", "Client")
+                        .WithMany("Recenzi")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("daw_proiect.Entities.Produs", "Produs")
-                        .WithMany()
+                        .WithMany("Recenzii")
                         .HasForeignKey("ProdusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("daw_proiect.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                    b.Navigation("Client");
+
+                    b.Navigation("Produs");
+                });
+
+            modelBuilder.Entity("daw_proiect.Entities.Reteta", b =>
+                {
+                    b.HasOne("daw_proiect.Entities.Produs", "Produs")
+                        .WithOne("Reteta")
+                        .HasForeignKey("daw_proiect.Entities.Reteta", "ProdusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Produs");
+                });
 
-                    b.Navigation("User");
+            modelBuilder.Entity("daw_proiect.Entities.Stoc", b =>
+                {
+                    b.HasOne("daw_proiect.Entities.Locatie", "Locatie")
+                        .WithMany("Produse")
+                        .HasForeignKey("LocatieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("daw_proiect.Entities.Produs", "Produs")
+                        .WithMany("Locatii")
+                        .HasForeignKey("ProdusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Locatie");
+
+                    b.Navigation("Produs");
                 });
 
             modelBuilder.Entity("daw_proiect.Entities.Categorie", b =>
@@ -260,7 +341,21 @@ namespace daw_proiect.Migrations
                     b.Navigation("Produse");
                 });
 
+            modelBuilder.Entity("daw_proiect.Entities.Client", b =>
+                {
+                    b.Navigation("AdresaPrincipala");
+
+                    b.Navigation("Comenzi");
+
+                    b.Navigation("Recenzi");
+                });
+
             modelBuilder.Entity("daw_proiect.Entities.Comanda", b =>
+                {
+                    b.Navigation("Produse");
+                });
+
+            modelBuilder.Entity("daw_proiect.Entities.Locatie", b =>
                 {
                     b.Navigation("Produse");
                 });
@@ -268,14 +363,13 @@ namespace daw_proiect.Migrations
             modelBuilder.Entity("daw_proiect.Entities.Produs", b =>
                 {
                     b.Navigation("Comenzi");
-                });
 
-            modelBuilder.Entity("daw_proiect.Entities.User", b =>
-                {
-                    b.Navigation("AdresaPrincipala")
+                    b.Navigation("Locatii");
+
+                    b.Navigation("Recenzii");
+
+                    b.Navigation("Reteta")
                         .IsRequired();
-
-                    b.Navigation("Comenzi");
                 });
 #pragma warning restore 612, 618
         }

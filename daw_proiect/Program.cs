@@ -60,6 +60,9 @@ builder.Services.AddScoped<IProdusService, ProdusService>();
 builder.Services.AddScoped<IComandaRepository, ComandaRepository>();
 builder.Services.AddScoped<IComandaService, ComandaService>();
 
+builder.Services.AddScoped<IRetetaRepository, RetetaRepository>();
+builder.Services.AddScoped<IRetetaService, RetetaService>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

@@ -1,5 +1,6 @@
 ﻿using daw_proiect.ContextModels;
 using daw_proiect.Entities;
+using daw_proiect.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace daw_proiect.Repositories
@@ -48,11 +49,13 @@ namespace daw_proiect.Repositories
                 return r;
             }
 
-            /*public async Task UpdateLocatieAsync(Locatie locatie)
-            {
-                _locatieContext.Entry(locatie).State = EntityState.Modified;
-                await _locatieContext.SaveChangesAsync();
-            */
+        public async Task UpdateRecenzieAsync(int id, Recenzie recenzie)
+        {
+            var rec = await _recenzieContext.Recenzie.FirstOrDefaultAsync(r => r.Id == id);
+            if (rec != null) recenzie.Id = rec.Id;
+            _recenzieContext.Recenzie.Entry(rec).CurrentValues.SetValues(recenzie);
+            await _recenzieContext.SaveChangesAsync();
+        }
 
 
     }

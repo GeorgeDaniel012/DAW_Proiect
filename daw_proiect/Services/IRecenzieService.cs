@@ -1,4 +1,5 @@
 ﻿using daw_proiect.Entities;
+using daw_proiect.Models;
 
 namespace daw_proiect.Services
 {
@@ -8,5 +9,7 @@ namespace daw_proiect.Services
         public Task<Recenzie> GetRecenzieAsync(int id);
         public Task<Recenzie> PutRecenzieAsync(Recenzie recenzie);
         public Task<Recenzie> DeleteRecenzieAsync(int id);
+        public Task<Recenzie> UpdateRecenzieAsync(int id, RecenzieDto recenzie);
     }
 }
+

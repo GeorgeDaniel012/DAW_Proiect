@@ -49,13 +49,13 @@ namespace daw_proiect.Repositories
             }
             return locatie;
         }
-
-        /*public async Task UpdateLocatieAsync(Locatie locatie)
+        public async Task UpdateLocatieAsync(int id, Locatie locatie)
         {
-            _locatieContext.Entry(locatie).State = EntityState.Modified;
+            var locatieToUpdate = await _locatieContext.Locatie.FirstOrDefaultAsync(loc => loc.Id == id);
+            if (locatieToUpdate != null) locatie.Id = locatieToUpdate.Id;
+            _locatieContext.Locatie.Entry(locatieToUpdate).CurrentValues.SetValues(locatie);
             await _locatieContext.SaveChangesAsync();
-        */
-
+        }
 
     }
 }
