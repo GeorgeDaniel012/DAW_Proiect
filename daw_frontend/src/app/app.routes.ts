@@ -5,6 +5,9 @@ import { UtilizatoriComponent } from './utilizatori/utilizatori.component';
 import { ClientiComponent } from './clienti/clienti.component';
 import { ComenziComponent } from './comenzi/comenzi.component';
 import { AcasaComponent } from './acasa/acasa.component';
+import { RecenziiComponent } from './recenzii/recenzii.component';
+import { LocatieComponent } from './locatii/locatii.component';
+import { ReteteComponent } from './retete/retete.component';
 
 export const routes: Routes = [
     {
@@ -30,5 +33,17 @@ export const routes: Routes = [
     {
         path: "comenzi",
         component: ComenziComponent
+    },
+    {
+        path: "locatie",
+        component: LocatieComponent
+    },
+    {
+        path: "recenzii",
+        component: RecenziiComponent
+    },
+    {
+        path: "retete",
+        component: ReteteComponent
     }
 ];
