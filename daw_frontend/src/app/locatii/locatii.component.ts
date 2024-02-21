@@ -9,8 +9,8 @@ import { RouterLink } from '@angular/router';
 @Component({
     selector: 'app-locatie',
     standalone: true,
-    templateUrl: './locatie.component.html',
-    styleUrl: './locatie.component.css',
+    templateUrl: './locatii.component.html',
+    styleUrl: './locatii.component.css',
     imports: [
       RouterLink,
       NgForOf,
@@ -19,11 +19,11 @@ import { RouterLink } from '@angular/router';
 })
 export class LocatieComponent {
   constructor(private locatieService: LocatieService){}
-  locatie: any[] = [];
+  locatii: any[] = [];
   ngOnInit(): void {
     this.locatieService.getLocatie().pipe(take(1)).subscribe(
       (x: any) => {
-        this.locatie = x;
+        this.locatii = x;
       });
     
   }

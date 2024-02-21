@@ -1,11 +1,19 @@
 import { Component } from '@angular/core';
 import { RecenziiService } from '../services/recenzii.service';
 import { take } from 'rxjs';
+import { RecenzieCompComponent } from "../recenzie-comp/recenzie-comp.component";
+import { RouterLink } from '@angular/router';
+import { NgForOf } from '@angular/common';
+
 
 @Component({
   selector: 'app-recenzii',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterLink,
+    NgForOf,
+    RecenzieCompComponent
+  ],
   templateUrl: './recenzii.component.html',
   styleUrl: './recenzii.component.css'
 })
